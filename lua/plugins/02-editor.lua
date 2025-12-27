@@ -2,6 +2,7 @@ return {
   -- Telescope configuration
   {
     "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
     keys = {
       {
         "<leader>fp",
@@ -11,6 +12,11 @@ return {
           })
         end,
         desc = "Find Plugin File",
+      },
+      {
+        "<leader>fc",
+        "<cmd>Telescope colorscheme<cr>",
+        desc = "Find Colorscheme",
       },
     },
   },
