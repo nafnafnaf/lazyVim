@@ -1,0 +1,42 @@
+return {
+  -- Gruvbox colorscheme
+  {
+    "ellisonleao/gruvbox.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      terminal_colors = true,
+      contrast = "", -- or "hard" or "soft"
+    },
+  },
+
+  -- Solarized Osaka
+  {
+    "craftzdog/solarized-osaka.nvim",
+    lazy = false,
+    priority = 1000,
+  },
+
+  -- TokyoNight
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+  },
+
+  -- Catppuccin
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = false,
+    priority = 1000,
+  },
+
+  -- Configure LazyVim default colorscheme
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "gruvbox",
+    },
+  },
+}
