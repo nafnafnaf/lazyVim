@@ -16,3 +16,24 @@ vim.api.nvim_create_autocmd("TermOpen", {
     vim.cmd("startinsert")
   end,
 })
+
+-- 3-pane layout helper
+vim.keymap.set("n", "<leader>3p", function()
+  -- Close all windows except current
+  vim.cmd("only")
+  
+  -- Open Neo-tree on the left
+  vim.cmd("Neotree show left")
+  
+  -- Move back to main window
+  vim.cmd("wincmd l")
+  
+  -- Split bottom for terminal
+  vim.cmd("split")
+  vim.cmd("wincmd J")
+  vim.cmd("resize 15")
+  vim.cmd("terminal")
+  
+  -- Return to main editor window
+  vim.cmd("wincmd k")
+end, { desc = "Open 3-pane layout (tree + editor + terminal)" })
