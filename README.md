@@ -23,7 +23,7 @@ My personal LazyVim configuration for Neovim, optimized for multi-language devel
 
 ### Prerequisites
 
-- macOS (tested on Apple Silicon M1+)
+- macOS (tested on Apple Silicon M4)
 - Homebrew package manager
 - Git
 
@@ -31,7 +31,7 @@ My personal LazyVim configuration for Neovim, optimized for multi-language devel
 
 ```bash
 # Clone this repository
-git clone https://github.com/YOUR_USERNAME/nvim-config.git ~/.config/nvim
+git clone https://github.com/nafnafnaf/nvim-config.git ~/.config/nvim
 
 # Run the installation script
 cd ~/.config/nvim
