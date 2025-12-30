@@ -81,7 +81,7 @@ brew install lazygit
 ### 3. Clone Configuration
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/nvim-config.git ~/.config/nvim
+git clone https://github.com/nafnafnaf/nvim-config.git ~/.config/nvim
 ```
 
 ### 4. Start Neovim
