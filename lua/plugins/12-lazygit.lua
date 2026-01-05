@@ -1,18 +1,15 @@
 return {
   {
     "kdheepak/lazygit.nvim",
-    cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-      "LazyGitCurrentFile",
-      "LazyGitFilter",
-      "LazyGitFilterCurrentFile",
-    },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
+    cmd = "LazyGit",
     keys = {
-      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+      {
+        "<leader>gg",
+        function()
+          vim.cmd("terminal toolbox run -c dev lazygit")
+        end,
+        desc = "LazyGit",
+      },
     },
   },
 }
