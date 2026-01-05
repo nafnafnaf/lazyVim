@@ -205,7 +205,7 @@ return {
         pickers = {
           find_files = {
             hidden = false,
-            find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
+            -- Don't specify find_command, let Telescope use default
           },
           
           buffers = {
