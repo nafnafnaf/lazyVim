@@ -126,19 +126,60 @@ map("n", "<leader>Y", '"+Y', { desc = "Yank line to clipboard" })
 map("n", "<leader>3p", function()
   -- Close all windows except current
   vim.cmd("only")
-  
+
   -- Open Neo-tree on left
   vim.cmd("Neotree position=left")
-  
+
   -- Focus back to main window
   vim.cmd("wincmd l")
-  
+
   -- Open terminal at bottom
   vim.cmd("split")
   vim.cmd("wincmd j")
   vim.cmd("terminal")
   vim.cmd("resize 15")
-  
+
   -- Focus back to editor
   vim.cmd("wincmd k")
 end, { desc = "3-pane layout (tree + editor + terminal)" })
+
+-- Execute current file in terminal below
+map("n", "<C-x>", function()
+  local file = vim.fn.expand("%:p")
+  local filetype = vim.bo.filetype
+
+  -- Determine how to run the file based on type
+  local cmd
+  if filetype == "python" then
+    cmd = "toolbox run -c dev python3 " .. file
+  elseif filetype == "sh" or filetype == "bash" then
+    cmd = "bash " .. file
+  elseif filetype == "javascript" then
+    cmd = "toolbox run -c dev node " .. file
+  elseif filetype == "lua" then
+    cmd = "lua " .. file
+  else
+    cmd = file
+  end
+
+  -- Find terminal buffer and send command
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.bo[buf].buftype == "terminal" then
+      local chan_id = vim.b[buf].terminal_job_id
+      if chan_id then
+        vim.api.nvim_chan_send(chan_id, cmd .. "\n")
+        vim.notify("Executed: " .. cmd, vim.log.levels.INFO)
+        return
+      end
+    end
+  end
+
+  -- No terminal found, open one and run
+  vim.cmd("split")
+  vim.cmd("terminal")
+  vim.cmd("resize 15")
+  vim.defer_fn(function()
+    local chan_id = vim.b.terminal_job_id
+    vim.api.nvim_chan_send(chan_id, cmd .. "\n")
+  end, 100)
+end, { desc = "Execute file in terminal" })
