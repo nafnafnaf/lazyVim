@@ -1,4 +1,4 @@
--- Floating Terminal with Toolbox integration
+-- Floating Terminal Configuration for Mac
 -- Place this file at: ~/.config/nvim/lua/plugins/19-terminal.lua
 
 return {
@@ -9,7 +9,7 @@ return {
       -- ========================================================================
       -- TOGGLE TERMINALS
       -- ========================================================================
-      
+
       -- Toggle floating terminal
       {
         "<leader>t",
@@ -17,7 +17,7 @@ return {
         desc = "Terminal: Toggle float",
         mode = { "n", "t" },
       },
-      
+
       -- Toggle horizontal terminal (bottom split)
       {
         "<leader>tt",
@@ -25,7 +25,7 @@ return {
         desc = "Terminal: Toggle horizontal",
         mode = { "n", "t" },
       },
-      
+
       -- Toggle vertical terminal (right split)
       {
         "<leader>tv",
@@ -33,11 +33,11 @@ return {
         desc = "Terminal: Toggle vertical",
         mode = { "n", "t" },
       },
-      
+
       -- ========================================================================
       -- MULTIPLE TERMINALS (numbered terminals)
       -- ========================================================================
-      
+
       -- Terminal 1
       {
         "<leader>t1",
@@ -45,7 +45,7 @@ return {
         desc = "Terminal: Toggle 1",
         mode = { "n", "t" },
       },
-      
+
       -- Terminal 2
       {
         "<leader>t2",
@@ -53,7 +53,7 @@ return {
         desc = "Terminal: Toggle 2",
         mode = { "n", "t" },
       },
-      
+
       -- Terminal 3
       {
         "<leader>t3",
@@ -61,42 +61,18 @@ return {
         desc = "Terminal: Toggle 3",
         mode = { "n", "t" },
       },
-      
+
       -- ========================================================================
-      -- TOOLBOX TERMINALS (quick access to dev toolbox)
+      -- SPECIALIZED TERMINALS (Mac native)
       -- ========================================================================
-      
-      -- Open terminal directly in dev toolbox
-      {
-        "<leader>td",
-        function()
-          local Terminal = require("toggleterm.terminal").Terminal
-          local toolbox = Terminal:new({
-            cmd = "toolbox enter dev",
-            direction = "float",
-            close_on_exit = false,
-            on_open = function(term)
-              vim.cmd("startinsert!")
-              vim.notify("Entered dev toolbox", vim.log.levels.INFO)
-            end,
-          })
-          toolbox:toggle()
-        end,
-        desc = "Terminal: Dev toolbox",
-        mode = { "n", "t" },
-      },
-      
-      -- ========================================================================
-      -- SPECIALIZED TERMINALS
-      -- ========================================================================
-      
-      -- Python REPL in toolbox
+
+      -- Python REPL
       {
         "<leader>tp",
         function()
           local Terminal = require("toggleterm.terminal").Terminal
           local python = Terminal:new({
-            cmd = "toolbox run -c dev python3",
+            cmd = "python3",
             direction = "float",
             close_on_exit = false,
           })
@@ -104,14 +80,14 @@ return {
         end,
         desc = "Terminal: Python REPL",
       },
-      
-      -- Node REPL in toolbox
+
+      -- Node REPL
       {
         "<leader>tn",
         function()
           local Terminal = require("toggleterm.terminal").Terminal
           local node = Terminal:new({
-            cmd = "toolbox run -c dev node",
+            cmd = "node",
             direction = "float",
             close_on_exit = false,
           })
@@ -119,14 +95,14 @@ return {
         end,
         desc = "Terminal: Node REPL",
       },
-      
-      -- LazyGit in toolbox
+
+      -- LazyGit
       {
         "<leader>tg",
         function()
           local Terminal = require("toggleterm.terminal").Terminal
           local lazygit = Terminal:new({
-            cmd = "toolbox run -c dev lazygit",
+            cmd = "lazygit",
             direction = "float",
             close_on_exit = true,
             float_opts = {
@@ -142,14 +118,14 @@ return {
         end,
         desc = "Terminal: LazyGit",
       },
-      
-      -- Htop in toolbox
+
+      -- Htop (if installed via brew)
       {
         "<leader>th",
         function()
           local Terminal = require("toggleterm.terminal").Terminal
           local htop = Terminal:new({
-            cmd = "toolbox run -c dev htop",
+            cmd = "htop",
             direction = "float",
             close_on_exit = true,
           })
@@ -158,7 +134,7 @@ return {
         desc = "Terminal: Htop",
       },
     },
-    
+
     opts = {
       -- Size
       size = function(term)
@@ -168,23 +144,23 @@ return {
           return vim.o.columns * 0.4
         end
       end,
-      
+
       -- Open in insert mode
       start_in_insert = true,
-      
+
       -- Terminal shell
       shell = vim.o.shell,
-      
+
       -- Persist terminal size
       persist_size = true,
       persist_mode = true,
-      
+
       -- Close terminal on process exit
       close_on_exit = true,
-      
+
       -- Auto scroll to bottom
       auto_scroll = true,
-      
+
       -- Float terminal options
       float_opts = {
         border = "curved",
@@ -200,13 +176,13 @@ return {
           background = "Normal",
         },
       },
-      
+
       -- Shade inactive terminals
       shading_factor = 2,
-      
+
       -- Direction: 'vertical' | 'horizontal' | 'tab' | 'float'
       direction = "float",
-      
+
       -- Hide line numbers in terminal
       on_open = function(term)
         vim.cmd("startinsert!")
@@ -215,10 +191,10 @@ return {
         vim.opt_local.signcolumn = "no"
       end,
     },
-    
+
     config = function(_, opts)
       require("toggleterm").setup(opts)
-      
+
       -- Terminal specific keymaps
       function _G.set_terminal_keymaps()
         local opts_map = { buffer = 0 }
@@ -231,7 +207,7 @@ return {
         vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts_map)
         vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts_map)
       end
-      
+
       -- Apply terminal keymaps when terminal opens
       vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
     end,

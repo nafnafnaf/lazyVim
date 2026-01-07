@@ -6,7 +6,7 @@ return {
       {
         "<leader>gg",
         function()
-          vim.cmd("terminal toolbox run -c dev lazygit")
+          vim.cmd("terminal lazygit")
         end,
         desc = "LazyGit",
       },
