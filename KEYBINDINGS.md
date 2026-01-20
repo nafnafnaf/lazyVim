@@ -1,7 +1,8 @@
 # LazyVim Efficiency Setup - Keybinding Cheatsheet
 
 **Last Updated:** January 2026
-
+# testign
+╰───────────────────────────────────────────────────────╯│index 499a080..487784a 100644                                │ E21: Cannot make changes, 'modifiable' is off │▐
 ---
 
 ## 🎯 Most Important (Memorize First)
