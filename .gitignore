@@ -11,3 +11,6 @@ lua/nvimlog
 *.swp
 *.swo
 *~
+*.bak
+*.bak2
+lazy/
