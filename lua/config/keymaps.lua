@@ -10,13 +10,11 @@ vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
 
 -- 3-pane layout
 vim.keymap.set("n", "<leader>3p", function()
+  vim.cmd("Neotree close")
   vim.cmd("only")
   vim.cmd("Neotree show position=left")
   vim.cmd("wincmd l")
-  vim.cmd("split")
-  vim.cmd("wincmd J")
-  vim.cmd("resize 12")
-  vim.cmd("terminal")
+  require("toggleterm").toggle(1, 12, nil, "horizontal")
   vim.cmd("wincmd k")
 end, { desc = "Open 3-pane layout" })
 
